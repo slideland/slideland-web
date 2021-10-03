@@ -32,7 +32,7 @@ const MapCard: React.FC = () => {
       <Divider />
       <List>
           <ListItem disablePadding>
-              <ListItemButton role={undefined} onClick={handleToggle("value")} dense>
+              <ListItemButton role={undefined} onClick={(e) => handleToggle("value")} dense>
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
@@ -56,7 +56,7 @@ const MapCard: React.FC = () => {
       <Divider />
       <List>
           <ListItem disablePadding>
-              <ListItemButton role={undefined} onClick={handleToggle("value")} dense>
+              <ListItemButton role={undefined} onClick={(e) => handleToggle("value")} dense>
                 <ListItemIcon>
                   <Checkbox
                     edge="start"
