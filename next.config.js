@@ -2,9 +2,10 @@
 require("dotenv").config();
 module.exports = {
   env: {
-    GRAPHQL_URI: process.env.GRAPHQL_URI,
-    REFRESH_TOKEN_URI: process.env.REFRESH_TOKEN_URI,
-    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN
+    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
+    BACKEND_URL: process.env.BACKEND_URL,
+    BACKEND_SLIDE_PATH: process.env.BACKEND_SLIDE_PATH,
+    BACKEND_UPLOAD_MODEL_PATH: process.env.BACKEND_UPLOAD_MODEL_PATH
   },
   reactStrictMode: true,
 }

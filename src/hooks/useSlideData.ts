@@ -12,7 +12,7 @@ export const useSlideData = () => {
   const [loading, setLoading] = React.useState(false)
 
   const buildQuery = () => {
-    const base_url = `http://localhost:5000/history/`
+    const base_url = `${process.env.BACKEND_URL}${process.env.BACKEND_SLIDE_PATH}`
     const url = base_url
     return url
   }

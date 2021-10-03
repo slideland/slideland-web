@@ -8,6 +8,7 @@ import Search from './Search';
 import { Suggestion } from '../hooks/useMapboxSearch';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import React from 'react'
+import Link from 'next/link';
 import Drawer from './Drawer';
 
 const TextStack = styled('div')`
@@ -17,6 +18,7 @@ const TextStack = styled('div')`
 
   h3 {
     margin-bottom: 0.3rem;
+    cursor: pointer;
   }
 `
 
@@ -44,7 +46,9 @@ const Navbar: React.FC<SearchProps> = ({onSearch, isSearchable = true}) => {
               </IconButton>
           <Box sx={{ flexGrow: 1 }}>
             <TextStack>
+              <Link href="/">
               <h3>Slideland</h3>
+              </Link>
               <p>Landslide risk indicator system</p>
             </TextStack>
           </Box>

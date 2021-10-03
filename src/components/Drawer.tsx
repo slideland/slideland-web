@@ -11,6 +11,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 import { ThemeProvider } from '@mui/system'
 import { createTheme } from "@mui/material/styles";
 import CloseIcon from '@mui/icons-material/Close';
+import MapIcon from '@mui/icons-material/Map';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
@@ -51,6 +52,16 @@ const Drawer: React.FC<DrawerProps> = ({ toggleDrawer }) => {
         </IconButton>
         <nav aria-label="main items">
           <List>
+            <ListItem disablePadding>
+              <Link href="/">
+                <ListItemButton>
+                  <ListItemIcon>
+                    <MapIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Map" />
+                </ListItemButton>
+              </Link>
+            </ListItem>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
