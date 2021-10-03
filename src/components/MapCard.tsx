@@ -18,7 +18,7 @@ interface Props {
   showSlides: boolean
 }
 
-const MapCard: React.FC<Props> = ({showSlides, setShowSlides}) => {
+const MapCard: React.FC<Props> = ({ showSlides, setShowSlides }) => {
   const [checked, setChecked] = React.useState([0])
 
   const handleToggle = (value: string) => {
@@ -50,7 +50,10 @@ const MapCard: React.FC<Props> = ({showSlides, setShowSlides}) => {
                   inputProps={{ 'aria-labelledby': 'labelId' }}
                 />
               </ListItemIcon>
-              <ListItemText primary={`NASA — PMM Publisher`} secondary={`Score between 0-2`}/>
+              <ListItemText
+                primary={`NASA — PMM Publisher`}
+                secondary={`Score between 0-2`}
+              />
             </ListItemButton>
           </ListItem>
         </List>

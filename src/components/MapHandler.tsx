@@ -40,7 +40,10 @@ const MapHandler: React.FC<Props> = ({ location, showSlides }) => {
       const point = map.current.getLayer('slide-point')
 
       if (area !== undefined && point !== undefined) {
-        const visibility = map.current.getLayoutProperty('slide-area', 'visibility')
+        const visibility = map.current.getLayoutProperty(
+          'slide-area',
+          'visibility',
+        )
         if (visibility === 'visible') {
           map.current.setLayoutProperty('slide-area', 'visibility', 'none')
           map.current.setLayoutProperty('slide-point', 'visibility', 'none')
