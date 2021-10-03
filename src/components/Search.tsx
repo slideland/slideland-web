@@ -1,8 +1,8 @@
-import { styled, alpha } from '@mui/material/styles';
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
+import { styled, alpha } from '@mui/material/styles'
+import SearchIcon from '@mui/icons-material/Search'
+import InputBase from '@mui/material/InputBase'
 import React, { KeyboardEventHandler } from 'react'
-import { Suggestion, useMapboxSearch } from '../hooks/useMapboxSearch';
+import { Suggestion, useMapboxSearch } from '../hooks/useMapboxSearch'
 
 const SearchWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -17,7 +17,7 @@ const SearchWrapper = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
-}));
+}))
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -27,7 +27,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}));
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -44,7 +44,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
-}));
+}))
 
 const LocationSuggestions = styled('div')`
   background-color: white;
@@ -63,7 +63,7 @@ const SuggestionItem = styled('div')<{ active: boolean }>`
   ${(props) => props.active && `background-color: #F3CAC3;`}
 
   &:hover {
-    background-color: #F3CAC3;
+    background-color: #f3cac3;
   }
 `
 
@@ -95,7 +95,9 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
     setActiveSuggestion(0)
   }
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     // Enter key/tab key
     if (e.key === 'Enter') {
       clickedInput(suggestions[activeSuggestion])
@@ -132,7 +134,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
           textChanged(e.target.value)
         }
         value={query}
-        onKeyUp= {(e) => onKeyDown(e)}
+        onKeyUp={(e) => onKeyDown(e)}
         ref={descRef}
       />
       {openSuggestions && (
@@ -151,7 +153,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
         </LocationSuggestions>
       )}
     </SearchWrapper>
-  );
+  )
 }
 
 export default Search

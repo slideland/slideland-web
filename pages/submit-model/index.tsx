@@ -21,7 +21,10 @@ const SubmitModel: NextPage = () => {
     <div>
       <Head>
         <title>Submit model | Slideland</title>
-        <meta name="description" content="Slideland — A landslide risk detection app" />
+        <meta
+          name="description"
+          content="Slideland — A landslide risk detection app"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
@@ -33,6 +36,5 @@ const SubmitModel: NextPage = () => {
     </div>
   )
 }
-
 
 export default SubmitModel

@@ -18,22 +18,22 @@ const HighScoreContainer = styled.div`
 `
 
 const ModelScores: NextPage = () => {
-    return (
-        <div>
-            <Head>
-                <title>Model Scores | Slideland</title>
-                <meta name="description" content="Slideland — A landslide risk detection app" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <Main>
-                <Navbar isSearchable={false} />
-                <HighScoreContainer>
-                    
-                </HighScoreContainer>
-            </Main>
-        </div>
-    )
+  return (
+    <div>
+      <Head>
+        <title>Model Scores | Slideland</title>
+        <meta
+          name="description"
+          content="Slideland — A landslide risk detection app"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Main>
+        <Navbar isSearchable={false} />
+        <HighScoreContainer></HighScoreContainer>
+      </Main>
+    </div>
+  )
 }
-
 
 export default ModelScores

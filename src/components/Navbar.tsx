@@ -1,15 +1,15 @@
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import MenuIcon from '@mui/icons-material/Menu';
-import IconButton from '@mui/material/IconButton';
-import Search from './Search';
-import { Suggestion } from '../hooks/useMapboxSearch';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import MenuIcon from '@mui/icons-material/Menu'
+import IconButton from '@mui/material/IconButton'
+import Search from './Search'
+import { Suggestion } from '../hooks/useMapboxSearch'
+import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 import React from 'react'
-import Link from 'next/link';
-import Drawer from './Drawer';
+import Link from 'next/link'
+import Drawer from './Drawer'
 
 const TextStack = styled('div')`
   display: flex;
@@ -27,7 +27,7 @@ interface SearchProps {
   isSearchable?: boolean
 }
 
-const Navbar: React.FC<SearchProps> = ({onSearch, isSearchable = true}) => {
+const Navbar: React.FC<SearchProps> = ({ onSearch, isSearchable = true }) => {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -35,24 +35,26 @@ const Navbar: React.FC<SearchProps> = ({onSearch, isSearchable = true}) => {
       <AppBar position="static" sx={{ boxShadow: 0 }}>
         <Toolbar>
           <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                sx={{ mr: 2 }}
-                onClick={(e) => {setOpen(true)}}
-              >
-                <MenuIcon />
-              </IconButton>
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={(e) => {
+              setOpen(true)
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
           <Box sx={{ flexGrow: 1 }}>
             <TextStack>
               <Link href="/">
-              <h3>Slideland</h3>
+                <h3>Slideland</h3>
               </Link>
               <p>Landslide risk indicator system</p>
             </TextStack>
           </Box>
-          { isSearchable && onSearch && <Search onSearch={onSearch} /> }
+          {isSearchable && onSearch && <Search onSearch={onSearch} />}
         </Toolbar>
       </AppBar>
       <SwipeableDrawer
@@ -63,7 +65,7 @@ const Navbar: React.FC<SearchProps> = ({onSearch, isSearchable = true}) => {
         <Drawer toggleDrawer={setOpen} />
       </SwipeableDrawer>
     </Box>
-  );
+  )
 }
 
 export default Navbar

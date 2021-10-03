@@ -1,18 +1,18 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
-import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import Alert from '@mui/material/Alert'
+import IconButton from '@mui/material/IconButton'
+import Collapse from '@mui/material/Collapse'
+import Button from '@mui/material/Button'
+import CloseIcon from '@mui/icons-material/Close'
 
 interface Props {
   isOpen: boolean
   text: string
-  setOpen: (open: boolean) => void 
+  setOpen: (open: boolean) => void
 }
 
-const SuccessAlert: React.FC<Props> = ({isOpen, setOpen, text}) => {
+const SuccessAlert: React.FC<Props> = ({ isOpen, setOpen, text }) => {
   return (
     <Box maxWidth="md" sx={{ position: 'fixed', right: 18, bottom: 8 }}>
       <Collapse in={isOpen}>
@@ -23,7 +23,7 @@ const SuccessAlert: React.FC<Props> = ({isOpen, setOpen, text}) => {
               color="inherit"
               size="small"
               onClick={() => {
-                setOpen(false);
+                setOpen(false)
               }}
             >
               <CloseIcon fontSize="inherit" />
@@ -35,10 +35,10 @@ const SuccessAlert: React.FC<Props> = ({isOpen, setOpen, text}) => {
         </Alert>
       </Collapse>
     </Box>
-  );
+  )
 }
 
-const ErrorAlert: React.FC<Props> = ({isOpen, setOpen, text}) => {
+const ErrorAlert: React.FC<Props> = ({ isOpen, setOpen, text }) => {
   return (
     <Box maxWidth="md" sx={{ position: 'fixed', right: 18, bottom: 8 }}>
       <Collapse in={isOpen}>
@@ -49,7 +49,7 @@ const ErrorAlert: React.FC<Props> = ({isOpen, setOpen, text}) => {
               color="inherit"
               size="small"
               onClick={() => {
-                setOpen(false);
+                setOpen(false)
               }}
             >
               <CloseIcon fontSize="inherit" />
@@ -62,7 +62,7 @@ const ErrorAlert: React.FC<Props> = ({isOpen, setOpen, text}) => {
         </Alert>
       </Collapse>
     </Box>
-  );
+  )
 }
 
-export {SuccessAlert, ErrorAlert}
+export { SuccessAlert, ErrorAlert }

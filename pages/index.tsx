@@ -37,7 +37,10 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Slideland</title>
-        <meta name="description" content="Slideland — A landslide risk detection app" />
+        <meta
+          name="description"
+          content="Slideland — A landslide risk detection app"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
