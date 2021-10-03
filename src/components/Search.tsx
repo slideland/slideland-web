@@ -95,7 +95,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
     setActiveSuggestion(0)
   }
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     // Enter key/tab key
     if (e.key === 'Enter') {
       clickedInput(suggestions[activeSuggestion])

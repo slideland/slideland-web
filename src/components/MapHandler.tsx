@@ -1,3 +1,4 @@
+// @ts-nocheck
 import mapboxgl from 'mapbox-gl'
 import { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'

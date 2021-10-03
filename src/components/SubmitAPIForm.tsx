@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from 'react'
 import Axios from 'axios';
 import { Button, Container, List, ListItem, TextField, Typography } from '@mui/material';
