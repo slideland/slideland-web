@@ -42,44 +42,46 @@ interface DrawerProps {
   toggleDrawer: (isOpen: boolean) => void
 }
 
-const Drawer: React.FC<DrawerProps> = ({toggleDrawer}) => {
+const Drawer: React.FC<DrawerProps> = ({ toggleDrawer }) => {
   return (
     <ThemeProvider theme={darkTheme}>
-    <Box sx={{ width: '100%', height: '100%', maxWidth: 360, minWidth: 300, bgcolor: 'background.paper', color: 'text.primary'}}>
-      <IconButton aria-label="close" size="large" sx={{ml: 1, mt: 1}} onClick={(e) => {toggleDrawer(false)}}>
-        <CloseIcon fontSize="inherit" />
-      </IconButton>
-      <nav aria-label="main items">
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <FormatListNumberedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Best models" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <Link href="/submit-model">
+      <Box sx={{ width: '100%', height: '100%', maxWidth: 360, minWidth: 300, bgcolor: 'background.paper', color: 'text.primary' }}>
+        <IconButton aria-label="close" size="large" sx={{ ml: 1, mt: 1 }} onClick={(e) => { toggleDrawer(false) }}>
+          <CloseIcon fontSize="inherit" />
+        </IconButton>
+        <nav aria-label="main items">
+          <List>
+            <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <PublishIcon />
+                  <FormatListNumberedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Submit your model" />
+                <ListItemText primary="Best models" />
               </ListItemButton>
-            </Link>
-          </ListItem>
-        </List>
-      </nav>
-      <Divider />
-      <nav aria-label="secondary items">
-        <List>
-          <ListItem>
-            <Button sx={{width: '100%'}} variant="contained" size="large">Submit landslide data</Button>
-          </ListItem>
-        </List>
-      </nav>
-    </Box>
+            </ListItem>
+            <ListItem disablePadding>
+              <Link href="/submit-model">
+                <ListItemButton>
+                  <ListItemIcon>
+                    <PublishIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Submit your model" />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          </List>
+        </nav>
+        <Divider />
+        <nav aria-label="secondary items">
+          <List>
+            <ListItem>
+              <Link href="/submit-landslide">
+                <Button sx={{ width: '100%' }} variant="contained" size="large">Submit landslide data</Button>
+              </Link>
+            </ListItem>
+          </List>
+        </nav>
+      </Box>
     </ThemeProvider>
   )
 }

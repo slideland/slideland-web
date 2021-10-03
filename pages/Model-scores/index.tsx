@@ -21,14 +21,14 @@ const ModelScores: NextPage = () => {
     return (
         <div>
             <Head>
-                <title>Submit model | Slideland</title>
+                <title>Model Scores | Slideland</title>
                 <meta name="description" content="Slideland — A landslide risk detection app" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Main>
                 <Navbar isSearchable={false} />
                 <HighScoreContainer>
-                    Hello These are the best models !!
+                    
                 </HighScoreContainer>
             </Main>
         </div>
