@@ -3,11 +3,12 @@ import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
 import Search from './Search';
 import { Suggestion } from '../hooks/useMapboxSearch';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import React from 'react'
+import Drawer from './Drawer';
 
 const TextStack = styled('div')`
   display: flex;
@@ -20,10 +21,13 @@ const TextStack = styled('div')`
 `
 
 interface SearchProps {
-  onSearch: (location: Suggestion) => void
+  onSearch?: (location: Suggestion) => void
+  isSearchable?: boolean
 }
 
-const Navbar: React.FC<SearchProps> = ({onSearch}) => {
+const Navbar: React.FC<SearchProps> = ({onSearch, isSearchable = true}) => {
+  const [open, setOpen] = React.useState(false)
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ boxShadow: 0 }}>
@@ -34,6 +38,7 @@ const Navbar: React.FC<SearchProps> = ({onSearch}) => {
                 color="inherit"
                 aria-label="open drawer"
                 sx={{ mr: 2 }}
+                onClick={(e) => {setOpen(true)}}
               >
                 <MenuIcon />
               </IconButton>
@@ -43,9 +48,16 @@ const Navbar: React.FC<SearchProps> = ({onSearch}) => {
               <p>Landslide risk indicator system</p>
             </TextStack>
           </Box>
-          <Search onSearch={onSearch} />
+          { isSearchable && onSearch && <Search onSearch={onSearch} /> }
         </Toolbar>
       </AppBar>
+      <SwipeableDrawer
+        open={open}
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+      >
+        <Drawer toggleDrawer={setOpen} />
+      </SwipeableDrawer>
     </Box>
   );
 }
