@@ -2,6 +2,18 @@
 
 The web client for Slideland
 
+## Installation
+
+Make sure yarn is installed, otherwise see https://yarnpkg.com/getting-started/install.
+
+Then run:
+
+```bash
+yarn install
+```
+
+in the slideland-web directory.
+
 ## Development
 
 Run the development server:
