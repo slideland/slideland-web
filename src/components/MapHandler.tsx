@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import mapboxgl from 'mapbox-gl'
 import { useState, useRef, useEffect } from 'react'
