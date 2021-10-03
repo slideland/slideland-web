@@ -1,9 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import Button from '@mui/material/Button'
 import styled from 'styled-components'
 import Navbar from '../../src/components/Navbar'
+import SubmitForm from '../../src/components/SubmitForm'
 import React from 'react'
 
 const Main = styled.div`
@@ -11,7 +10,7 @@ const Main = styled.div`
   height: 100vh;
 `
 
-const MapContainer = styled.div`
+const FormContainer = styled.div`
   width: 100%;
   height: 100%;
 `
@@ -26,9 +25,13 @@ const SubmitModel: NextPage = () => {
       </Head>
       <Main>
         <Navbar isSearchable={false} />
+        <FormContainer>
+          <SubmitForm />
+        </FormContainer>
       </Main>
     </div>
   )
 }
+
 
 export default SubmitModel

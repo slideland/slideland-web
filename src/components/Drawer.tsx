@@ -13,6 +13,7 @@ import { createTheme } from "@mui/material/styles";
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import Link from 'next/link';
 
 const darkTheme = createTheme({
   palette: {
@@ -59,12 +60,14 @@ const Drawer: React.FC<DrawerProps> = ({toggleDrawer}) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PublishIcon />
-              </ListItemIcon>
-              <ListItemText primary="Submit your model" />
-            </ListItemButton>
+            <Link href="/submit-model">
+              <ListItemButton>
+                <ListItemIcon>
+                  <PublishIcon />
+                </ListItemIcon>
+                <ListItemText primary="Submit your model" />
+              </ListItemButton>
+            </Link>
           </ListItem>
         </List>
       </nav>
