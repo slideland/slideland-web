@@ -32,7 +32,7 @@ const Navbar: React.FC<SearchProps> = ({ onSearch, isSearchable = true }) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ boxShadow: 0 }}>
+      <AppBar position="static" sx={{ boxShadow: 0, height: '90px'}}>
         <Toolbar>
           <IconButton
             size="large"

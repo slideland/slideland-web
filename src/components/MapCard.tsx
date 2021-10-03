@@ -13,7 +13,12 @@ import ListItemText from '@mui/material/ListItemText'
 import Checkbox from '@mui/material/Checkbox'
 import Divider from '@mui/material/Divider'
 
-const MapCard: React.FC = () => {
+interface Props {
+  setShowSlides: (show: boolean) => void
+  showSlides: boolean
+}
+
+const MapCard: React.FC<Props> = ({showSlides, setShowSlides}) => {
   const [checked, setChecked] = React.useState([0])
 
   const handleToggle = (value: string) => {
@@ -45,7 +50,7 @@ const MapCard: React.FC = () => {
                   inputProps={{ 'aria-labelledby': 'labelId' }}
                 />
               </ListItemIcon>
-              <ListItemText primary={`NASA — PMM Publisher`} />
+              <ListItemText primary={`NASA — PMM Publisher`} secondary={`Score between 0-2`}/>
             </ListItemButton>
           </ListItem>
         </List>
@@ -61,13 +66,13 @@ const MapCard: React.FC = () => {
           <ListItem disablePadding>
             <ListItemButton
               role={undefined}
-              onClick={(e) => handleToggle('value')}
+              onClick={(e) => setShowSlides(!showSlides)}
               dense
             >
               <ListItemIcon>
                 <Checkbox
                   edge="start"
-                  checked={true}
+                  checked={showSlides}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ 'aria-labelledby': 'labelId' }}

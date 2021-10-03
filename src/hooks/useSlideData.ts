@@ -35,12 +35,14 @@ export const useSlideData = () => {
         const json = await response.json()
 
         const parsedSlides = json.result.map((rawSlide: any) => {
-          const coordinates = rawSlide.latitudes.map((lat: number, index: number) => [lat, rawSlide.longitudes[index]])
+          const coordinates = rawSlide.latitudes.map(
+            (lat: number, index: number) => [lat, rawSlide.longitudes[index]],
+          )
           const slide: Slide = {
             id: rawSlide._id.$oid,
             date: rawSlide.date,
             slides: rawSlide.landslides,
-            coordinates: coordinates
+            coordinates: coordinates,
           }
           return slide
         })

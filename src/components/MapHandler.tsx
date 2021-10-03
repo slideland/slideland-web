@@ -7,6 +7,7 @@ import { Suggestion } from '../hooks/useMapboxSearch'
 import { useSlideData } from '../hooks/useSlideData'
 import { Position, Feature, Geometry, GeoJsonProperties } from 'geojson'
 import getCentroid from '../utils/centroid'
+import { useModelData } from '../hooks/useModelData'
 
 mapboxgl.accessToken = process.env.MAPBOX_ACCESS_TOKEN || ''
 
@@ -17,17 +18,77 @@ const MapContainer = styled.div`
 
 interface Props {
   location?: Suggestion
+  showSlides: boolean
 }
 
-const MapHandler: React.FC<Props> = ({ location }) => {
+const MapHandler: React.FC<Props> = ({ location, showSlides }) => {
   const mapContainer = useRef(null)
   const map = useRef<mapboxgl.Map | null>(null)
-  const [lng, setLng] = useState(-70.9)
-  const [lat, setLat] = useState(42.35)
+  const [lng, setLng] = useState(90.433601)
+  const [lat, setLat] = useState(27.514162)
   const [bbox, setBbox] = useState<number[][]>()
-  const [zoom, setZoom] = useState(9)
+  const [zoom, setZoom] = useState(3)
 
   const { slides, loading } = useSlideData()
+
+  const [modelURL, setModelURL] = useState('')
+  const { geoJSONData, modelLoading } = useModelData(modelURL)
+
+  useEffect(() => {
+    if (map.current) {
+      const area = map.current.getLayer('slide-area')
+      const point = map.current.getLayer('slide-point')
+
+      if (area !== undefined && point !== undefined) {
+        const visibility = map.current.getLayoutProperty('slide-area', 'visibility')
+        if (visibility === 'visible') {
+          map.current.setLayoutProperty('slide-area', 'visibility', 'none')
+          map.current.setLayoutProperty('slide-point', 'visibility', 'none')
+        } else {
+          map.current.setLayoutProperty('slide-area', 'visibility', 'visible')
+          map.current.setLayoutProperty('slide-point', 'visibility', 'visible')
+        }
+      } else {
+        // add stuffs
+        addSlides()
+      }
+    }
+  }, [showSlides])
+
+  useEffect(() => {
+    console.log(geoJSONData.length)
+    if (map.current && geoJSONData.length !== 0) {
+      map.current.addSource('model', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: geoJSONData,
+        },
+      })
+
+      map.current.addLayer({
+        id: 'model-area',
+        type: 'fill',
+        source: 'model',
+        paint: {
+          'fill-color': ['get', 'color'],
+          'fill-opacity': 0.35,
+        },
+        filter: ['==', '$type', 'Polygon'],
+      })
+
+      map.current.addLayer({
+        id: 'model-point',
+        type: 'circle',
+        source: 'model',
+        paint: {
+          'circle-radius': 6,
+          'circle-color': '#1743d4',
+        },
+        filter: ['==', '$type', 'Point'],
+      })
+    }
+  }, [geoJSONData])
 
   useEffect(() => {
     if (location) {
@@ -58,6 +119,12 @@ const MapHandler: React.FC<Props> = ({ location }) => {
   })
 
   useEffect(() => {
+    map.current.on('load', () => {
+      setModelURL('https://slideland-backend.herokuapp.com/dummyapi/')
+    })
+  }, [])
+
+  const addSlides = () => {
     const geoJSON: Feature<Geometry, GeoJsonProperties>[] = slides.map(
       (slide) => {
         return [
@@ -88,41 +155,44 @@ const MapHandler: React.FC<Props> = ({ location }) => {
       },
     )
 
-    map.current.on('load', () => {
-      console.log(geoJSON.length)
-      if (map.current && geoJSON.length !== 0) {
-        map.current.addSource('slides', {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: geoJSON.flat(),
-          },
-        })
+    if (map.current && geoJSON.length !== 0) {
+      map.current.addSource('slides', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: geoJSON.flat(),
+        },
+      })
 
-        map.current.addLayer({
-          id: 'slide-area',
-          type: 'fill',
-          source: 'slides',
-          paint: {
-            'fill-color': '#FF0000',
-            'fill-opacity': 0.5,
-          },
-          filter: ['==', '$type', 'Polygon'],
-        })
+      map.current.addLayer({
+        id: 'slide-area',
+        type: 'fill',
+        source: 'slides',
+        layout: {
+          visibility: 'visible',
+        },
+        paint: {
+          'fill-color': '#FF0000',
+          'fill-opacity': 0.35,
+        },
+        filter: ['==', '$type', 'Polygon'],
+      })
 
-        map.current.addLayer({
-          id: 'slide-point',
-          type: 'circle',
-          source: 'slides',
-          paint: {
-            'circle-radius': 6,
-            'circle-color': '#B42222',
-          },
-          filter: ['==', '$type', 'Point'],
-        })
-      }
-    })
-  }, [slides])
+      map.current.addLayer({
+        id: 'slide-point',
+        type: 'circle',
+        source: 'slides',
+        layout: {
+          visibility: 'visible',
+        },
+        paint: {
+          'circle-radius': 6,
+          'circle-color': '#FF0000',
+        },
+        filter: ['==', '$type', 'Point'],
+      })
+    }
+  }
 
   useEffect(() => {
     if (!map.current) return
@@ -137,6 +207,26 @@ const MapHandler: React.FC<Props> = ({ location }) => {
     })
 
     map.current.on('click', 'slide-point', (e) => {
+      // Copy coordinates array.
+      if (e.features) {
+        const coordinates = e.features[0].geometry.coordinates.slice()
+        const description = e.features[0].properties.description
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+        }
+
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(description)
+          .addTo(map.current)
+      }
+    })
+
+    map.current.on('click', 'model-point', (e) => {
       // Copy coordinates array.
       if (e.features) {
         const coordinates = e.features[0].geometry.coordinates.slice()

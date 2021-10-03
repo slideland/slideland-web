@@ -11,7 +11,11 @@ import MapCard from '../src/components/MapCard'
 
 const Main = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 90px);
+`
+
+const MainContainer = styled.div`
+  height: 100%;
 `
 
 const MapContainer = styled.div`
@@ -28,13 +32,18 @@ const Box = styled.div`
 
 const Home: NextPage = () => {
   const [location, setLocation] = React.useState<Suggestion>()
+  const [showSlides, setShow] = React.useState(false)
 
   const onSearch = (location: Suggestion) => {
     setLocation(location)
   }
 
+  const setShowSlides = (show: boolean) => {
+    setShow(show)
+  }
+
   return (
-    <div>
+    <MainContainer>
       <Head>
         <title>Slideland</title>
         <meta
@@ -46,13 +55,13 @@ const Home: NextPage = () => {
       <Main>
         <Navbar onSearch={onSearch} />
         <MapContainer>
-          <MapHandler location={location} />
+          <MapHandler showSlides={showSlides} location={location} />
         </MapContainer>
         <Box>
-          <MapCard />
+          <MapCard showSlides={showSlides} setShowSlides={setShowSlides} />
         </Box>
       </Main>
-    </div>
+    </MainContainer>
   )
 }
 
